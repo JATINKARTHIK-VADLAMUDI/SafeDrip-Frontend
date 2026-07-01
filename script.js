@@ -7,21 +7,20 @@ async function loadData() {
     try {
 
         const response = await fetch(SERVER + "/api/data");
-
         const data = await response.json();
 
-        // Patient Details (defaults if backend doesn't provide them yet)
+        // Patient Details
         document.getElementById("patientName").innerHTML =
-            data.patientName || "Rahul";
+            data.patientName || "Rahul Kumar";
 
         document.getElementById("bedNumber").innerHTML =
-            data.bedNumber || "ICU-03";
+            data.bedNumber || "ICU-05";
 
         document.getElementById("ward").innerHTML =
             data.ward || "ICU";
 
         document.getElementById("doctor").innerHTML =
-            data.doctor || "Dr. Kumar";
+            data.doctor || "Dr. Reddy";
 
         // Live Data
         document.getElementById("txid").innerHTML =
@@ -58,10 +57,8 @@ async function loadData() {
             status.classList.add("danger");
 
         // Last Updated
-        const now = new Date();
-
         document.getElementById("time").innerHTML =
-            now.toLocaleTimeString();
+            new Date().toLocaleTimeString();
 
     }
 
