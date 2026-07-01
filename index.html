@@ -4,14 +4,11 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<title>🩺 SafeDrip Pro</title>
 
-<title>SafeDrip ICU Monitoring</title>
-
-<link rel="stylesheet"
-href="style.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -19,65 +16,51 @@ href="style.css">
 
 <div class="container">
 
-<div class="header">
+<header>
 
-<h1>🩺 SafeDrip ICU Monitoring System</h1>
+<h1>🩺 SafeDrip Pro</h1>
 
-<p>
-Real-Time Saline Monitoring
-</p>
+<p>Intelligent IV Monitoring System</p>
 
-</div>
-
-<!-- Patient Information -->
+</header>
 
 <div class="card">
 
-<h2>Patient Details</h2>
+<h2>👤 Patient Details</h2>
 
 <table>
 
 <tr>
-<td><b>Patient Name</b></td>
-<td id="patientName">
-Rahul
-</td>
+<td><b>Patient</b></td>
+<td id="patientName">Rahul Kumar</td>
 </tr>
 
 <tr>
-<td><b>Bed Number</b></td>
-<td id="bedNumber">
-ICU-03
-</td>
+<td><b>Bed</b></td>
+<td id="bedNumber">ICU-05</td>
 </tr>
 
 <tr>
 <td><b>Ward</b></td>
-<td id="ward">
-ICU
-</td>
+<td id="ward">ICU</td>
 </tr>
 
 <tr>
 <td><b>Doctor</b></td>
-<td id="doctor">
-Dr. Kumar
-</td>
+<td id="doctor">Dr. Reddy</td>
 </tr>
 
 </table>
 
 </div>
 
-<!-- Transmitter -->
+<div class="grid">
 
 <div class="card">
 
-<h2>Transmitter ID</h2>
+<h2>💧 Saline ID</h2>
 
-<div
-class="bigValue"
-id="txid">
+<div class="big" id="txid">
 
 SYS_01
 
@@ -85,15 +68,11 @@ SYS_01
 
 </div>
 
-<!-- Weight -->
-
 <div class="card">
 
-<h2>Saline Weight</h2>
+<h2>⚖ Weight</h2>
 
-<div
-class="bigValue"
-id="weight">
+<div class="big" id="weight">
 
 0.00 g
 
@@ -101,15 +80,11 @@ id="weight">
 
 </div>
 
-<!-- Relay -->
-
 <div class="card">
 
-<h2>Relay Status</h2>
+<h2>⚙ Relay</h2>
 
-<div
-class="bigValue"
-id="relay">
+<div class="big" id="relay">
 
 OFF
 
@@ -117,15 +92,11 @@ OFF
 
 </div>
 
-<!-- Status -->
-
 <div class="card">
 
-<h2>System Status</h2>
+<h2>🟢 Status</h2>
 
-<div
-class="bigValue"
-id="status">
+<div class="big" id="status">
 
 SAFE
 
@@ -133,100 +104,54 @@ SAFE
 
 </div>
 
-<!-- Motor -->
+</div>
+
+<div class="grid">
 
 <div class="card">
 
-<h2>Motor Control</h2>
+<h2>⚙ Motor Control</h2>
 
-<div
-class="bigValue"
-id="motor">
+<div class="big" id="motor">
 
 AUTO
 
 </div>
 
-<button
-onclick="sendMotor('ON')">
+<button onclick="sendMotor('ON')">ON</button>
 
-ON
+<button onclick="sendMotor('OFF')">OFF</button>
 
-</button>
-
-<button
-onclick="sendMotor('OFF')">
-
-OFF
-
-</button>
-
-<button
-onclick="sendMotor('AUTO')">
-
-AUTO
-
-</button>
+<button onclick="sendMotor('AUTO')">AUTO</button>
 
 </div>
-
-<!-- Buzzer -->
 
 <div class="card">
 
-<h2>Buzzer Control</h2>
+<h2>🔔 Buzzer Control</h2>
 
-<div
-class="bigValue"
-id="buzzer">
+<div class="big" id="buzzer">
 
 AUTO
 
 </div>
 
-<button
-onclick="sendBuzzer('ON')">
+<button onclick="sendBuzzer('ON')">ON</button>
 
-ON
+<button onclick="sendBuzzer('OFF')">OFF</button>
 
-</button>
-
-<button
-onclick="sendBuzzer('OFF')">
-
-OFF
-
-</button>
-
-<button
-onclick="sendBuzzer('AUTO')">
-
-AUTO
-
-</button>
+<button onclick="sendBuzzer('AUTO')">AUTO</button>
 
 </div>
 
-<!-- Last Updated -->
+</div>
 
 <div class="card">
 
-<h2>Last Updated</h2>
+<h2>🕒 Last Updated</h2>
 
-<div
-class="bigValue"
-id="time">
+<div class="big" id="time">
 
 --
 
-</div>
-
-</div>
-
-</div>
-
-<script src="script.js"></script>
-
-</body>
-
-</html>
+</
