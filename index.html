@@ -4,11 +4,14 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>SafeDrip ICU Monitoring</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+href="style.css">
 
 </head>
 
@@ -16,57 +19,207 @@
 
 <div class="container">
 
-<h1>🩺 SafeDrip ICU Monitoring</h1>
+<div class="header">
+
+<h1>🩺 SafeDrip ICU Monitoring System</h1>
+
+<p>
+Real-Time Saline Monitoring
+</p>
+
+</div>
+
+<!-- Patient Information -->
+
+<div class="card">
+
+<h2>Patient Details</h2>
+
+<table>
+
+<tr>
+<td><b>Patient Name</b></td>
+<td id="patientName">
+Rahul
+</td>
+</tr>
+
+<tr>
+<td><b>Bed Number</b></td>
+<td id="bedNumber">
+ICU-03
+</td>
+</tr>
+
+<tr>
+<td><b>Ward</b></td>
+<td id="ward">
+ICU
+</td>
+</tr>
+
+<tr>
+<td><b>Doctor</b></td>
+<td id="doctor">
+Dr. Kumar
+</td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- Transmitter -->
 
 <div class="card">
 
 <h2>Transmitter ID</h2>
 
-<h3 id="txid">SYS_01</h3>
+<div
+class="bigValue"
+id="txid">
+
+SYS_01
 
 </div>
+
+</div>
+
+<!-- Weight -->
 
 <div class="card">
 
 <h2>Saline Weight</h2>
 
-<h3 id="weight">0 g</h3>
+<div
+class="bigValue"
+id="weight">
+
+0.00 g
 
 </div>
+
+</div>
+
+<!-- Relay -->
 
 <div class="card">
 
 <h2>Relay Status</h2>
 
-<h3 id="relay">OFF</h3>
+<div
+class="bigValue"
+id="relay">
 
-</div>
-
-<div class="card">
-
-<h2>Status</h2>
-
-<h3 id="status">SAFE</h3>
-
-</div>
-
-<div class="card">
-
-<h2>Control Mode</h2>
-
-<h3 id="mode">AUTO</h3>
-
-<button onclick="sendCommand('ON')">
-ON
-</button>
-
-<button onclick="sendCommand('OFF')">
 OFF
+
+</div>
+
+</div>
+
+<!-- Status -->
+
+<div class="card">
+
+<h2>System Status</h2>
+
+<div
+class="bigValue"
+id="status">
+
+SAFE
+
+</div>
+
+</div>
+
+<!-- Motor -->
+
+<div class="card">
+
+<h2>Motor Control</h2>
+
+<div
+class="bigValue"
+id="motor">
+
+AUTO
+
+</div>
+
+<button
+onclick="sendMotor('ON')">
+
+ON
+
 </button>
 
-<button onclick="sendCommand('AUTO')">
-AUTO
+<button
+onclick="sendMotor('OFF')">
+
+OFF
+
 </button>
+
+<button
+onclick="sendMotor('AUTO')">
+
+AUTO
+
+</button>
+
+</div>
+
+<!-- Buzzer -->
+
+<div class="card">
+
+<h2>Buzzer Control</h2>
+
+<div
+class="bigValue"
+id="buzzer">
+
+AUTO
+
+</div>
+
+<button
+onclick="sendBuzzer('ON')">
+
+ON
+
+</button>
+
+<button
+onclick="sendBuzzer('OFF')">
+
+OFF
+
+</button>
+
+<button
+onclick="sendBuzzer('AUTO')">
+
+AUTO
+
+</button>
+
+</div>
+
+<!-- Last Updated -->
+
+<div class="card">
+
+<h2>Last Updated</h2>
+
+<div
+class="bigValue"
+id="time">
+
+--
+
+</div>
 
 </div>
 
