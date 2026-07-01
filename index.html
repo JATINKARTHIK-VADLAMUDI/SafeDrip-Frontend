@@ -1,232 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>SafeDrip ICU Monitoring</title>
-
-<link rel="stylesheet"
-href="style.css">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SafeDrip Pro - Intelligent IV Monitoring & Control System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body>
 
-<div class="container">
+<header class="topbar">
+<div>
+<h1>🩺 SafeDrip Pro</h1>
+<p>Intelligent IV Monitoring & Control System</p>
+</div>
+<div class="liveBox"><span class="liveDot"></span>LIVE</div>
+</header>
 
-<div class="header">
+<div class="dashboard">
 
-<h1>🩺 SafeDrip ICU Monitoring System</h1>
+<aside class="patientCard">
+<h2>👤 Patient Details</h2>
+<div class="infoRow"><span>Name</span><span id="patientName">Rahul Kumar</span></div>
+<div class="infoRow"><span>Age</span><span id="age">42</span></div>
+<div class="infoRow"><span>Gender</span><span id="gender">Male</span></div>
+<div class="infoRow"><span>Blood Group</span><span id="blood">O+</span></div>
+<div class="infoRow"><span>Doctor</span><span id="doctor">Dr. Reddy</span></div>
+<div class="infoRow"><span>Ward</span><span id="ward">ICU</span></div>
+<div class="infoRow"><span>Bed</span><span id="bed">ICU-05</span></div>
+<div class="infoRow"><span>Saline ID</span><span id="txid">SYS_01</span></div>
+<button class="settingsBtn">⚙ Settings</button>
+</aside>
 
-<p>
-Real-Time Saline Monitoring
-</p>
+<main>
+<section class="hero">
 
+<div class="weightCard">
+<h3>⚖ Current Weight</h3>
+<div id="weight" class="weight">0.00 g</div>
+<div id="status" class="status safe">SAFE</div>
+<div class="lastUpdated">Last Updated: <span id="time">--</span></div>
 </div>
 
-<!-- Patient Information -->
+<div class="controlCard">
+<h3>⚙ Motor</h3>
+<div id="motor" class="mode">AUTO</div>
+<div class="buttons">
+<button onclick="sendMotor('ON')">ON</button>
+<button onclick="sendMotor('OFF')">OFF</button>
+<button onclick="sendMotor('AUTO')">AUTO</button>
+</div>
+<hr>
+<h3>🔔 Buzzer</h3>
+<div id="buzzer" class="mode">AUTO</div>
+<div class="buttons">
+<button onclick="sendBuzzer('ON')">ON</button>
+<button onclick="sendBuzzer('OFF')">OFF</button>
+<button onclick="sendBuzzer('AUTO')">AUTO</button>
+</div>
+</div>
 
-<div class="card">
+</section>
 
-<h2>Patient Details</h2>
+<section class="cards">
+<div class="miniCard"><h3>☁ Cloud</h3><div id="cloudStatus">🟢 Connected</div></div>
+<div class="miniCard"><h3>📡 Receiver 1</h3><div id="receiver1">🟢 Online</div></div>
+<div class="miniCard"><h3>📡 Receiver 2</h3><div id="receiver2">🟢 Online</div></div>
+<div class="miniCard"><h3>⏳ ETA</h3><div id="eta">--</div></div>
+</section>
 
+<section class="graphCard">
+<h2>📈 Live Saline Trend</h2>
+<canvas id="weightChart"></canvas>
+</section>
+
+<section class="bottleCard">
+<h2>💧 Saline Bottle</h2>
+<div class="bottle"><div id="liquid"></div></div>
+<p id="bottleWeight">0.00 g Remaining</p>
+</section>
+
+<section class="historyCard">
+<h2>📜 Patient History</h2>
 <table>
-
-<tr>
-<td><b>Patient Name</b></td>
-<td id="patientName">
-Rahul
-</td>
-</tr>
-
-<tr>
-<td><b>Bed Number</b></td>
-<td id="bedNumber">
-ICU-03
-</td>
-</tr>
-
-<tr>
-<td><b>Ward</b></td>
-<td id="ward">
-ICU
-</td>
-</tr>
-
-<tr>
-<td><b>Doctor</b></td>
-<td id="doctor">
-Dr. Kumar
-</td>
-</tr>
-
+<thead><tr><th>Bottle</th><th>Started</th><th>Ended</th><th>Status</th></tr></thead>
+<tbody id="historyTable">
+<tr><td>1</td><td>09:00</td><td>11:20</td><td>Completed</td></tr>
+<tr><td>2</td><td>11:30</td><td>Current</td><td>Running</td></tr>
+</tbody>
 </table>
+</section>
+</main>
 
 </div>
 
-<!-- Transmitter -->
-
-<div class="card">
-
-<h2>Transmitter ID</h2>
-
-<div
-class="bigValue"
-id="txid">
-
-SYS_01
-
+<div id="emergencyBanner" class="hidden">
+🚨 LOW SALINE LEVEL 🚨<br>
+Please Replace Saline Bottle Immediately
 </div>
 
-</div>
-
-<!-- Weight -->
-
-<div class="card">
-
-<h2>Saline Weight</h2>
-
-<div
-class="bigValue"
-id="weight">
-
-0.00 g
-
-</div>
-
-</div>
-
-<!-- Relay -->
-
-<div class="card">
-
-<h2>Relay Status</h2>
-
-<div
-class="bigValue"
-id="relay">
-
-OFF
-
-</div>
-
-</div>
-
-<!-- Status -->
-
-<div class="card">
-
-<h2>System Status</h2>
-
-<div
-class="bigValue"
-id="status">
-
-SAFE
-
-</div>
-
-</div>
-
-<!-- Motor -->
-
-<div class="card">
-
-<h2>Motor Control</h2>
-
-<div
-class="bigValue"
-id="motor">
-
-AUTO
-
-</div>
-
-<button
-onclick="sendMotor('ON')">
-
-ON
-
-</button>
-
-<button
-onclick="sendMotor('OFF')">
-
-OFF
-
-</button>
-
-<button
-onclick="sendMotor('AUTO')">
-
-AUTO
-
-</button>
-
-</div>
-
-<!-- Buzzer -->
-
-<div class="card">
-
-<h2>Buzzer Control</h2>
-
-<div
-class="bigValue"
-id="buzzer">
-
-AUTO
-
-</div>
-
-<button
-onclick="sendBuzzer('ON')">
-
-ON
-
-</button>
-
-<button
-onclick="sendBuzzer('OFF')">
-
-OFF
-
-</button>
-
-<button
-onclick="sendBuzzer('AUTO')">
-
-AUTO
-
-</button>
-
-</div>
-
-<!-- Last Updated -->
-
-<div class="card">
-
-<h2>Last Updated</h2>
-
-<div
-class="bigValue"
-id="time">
-
---
-
-</div>
-
-</div>
-
-</div>
+<footer>
+© 2026 SafeDrip<br>
+Developed by V. Jatin Karthik
+</footer>
 
 <script src="script.js"></script>
-
 </body>
-
 </html>
