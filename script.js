@@ -1,6 +1,6 @@
 const SERVER = "https://safedrip-backend.onrender.com";
 
-// ---------------- LOAD LIVE DATA ----------------
+// ---------------- LOAD DATA ----------------
 
 async function loadData() {
 
@@ -10,60 +10,110 @@ async function loadData() {
 
         const data = await response.json();
 
+        // Patient Details (defaults if backend doesn't provide them yet)
+        document.getElementById("patientName").innerHTML =
+            data.patientName || "Rahul";
+
+        document.getElementById("bedNumber").innerHTML =
+            data.bedNumber || "ICU-03";
+
+        document.getElementById("ward").innerHTML =
+            data.ward || "ICU";
+
+        document.getElementById("doctor").innerHTML =
+            data.doctor || "Dr. Kumar";
+
+        // Live Data
         document.getElementById("txid").innerHTML =
             data.transmitter;
 
         document.getElementById("weight").innerHTML =
-            data.weight.toFixed(2) + " g";
+            Number(data.weight).toFixed(2) + " g";
 
         document.getElementById("relay").innerHTML =
             data.relay;
 
-        document.getElementById("status").innerHTML =
-            data.status;
+        document.getElementById("motor").innerHTML =
+            data.motor;
 
-        document.getElementById("mode").innerHTML =
-            data.mode;
+        document.getElementById("buzzer").innerHTML =
+            data.buzzer;
+
+        // Status
+        let status = document.getElementById("status");
+
+        status.innerHTML = data.status;
+
+        status.classList.remove("safe");
+        status.classList.remove("warning");
+        status.classList.remove("danger");
+
+        if (data.status === "SAFE")
+            status.classList.add("safe");
+
+        if (data.status === "WARNING")
+            status.classList.add("warning");
+
+        if (data.status === "DANGER")
+            status.classList.add("danger");
+
+        // Last Updated
+        const now = new Date();
+
+        document.getElementById("time").innerHTML =
+            now.toLocaleTimeString();
 
     }
 
-    catch (error) {
+    catch (err) {
 
-        console.log(error);
+        console.log(err);
 
     }
 
 }
 
-// ---------------- SEND CONTROL ----------------
+// ---------------- MOTOR ----------------
 
-async function sendCommand(mode) {
+async function sendMotor(mode) {
 
-    try {
+    await fetch(SERVER + "/api/control", {
 
-        await fetch(SERVER + "/api/control", {
+        method: "POST",
 
-            method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+        body: JSON.stringify({
+            motor: mode
+        })
 
-            body: JSON.stringify({
-                mode: mode
-            })
+    });
 
-        });
+    loadData();
 
-        loadData();
+}
 
-    }
+// ---------------- BUZZER ----------------
 
-    catch (error) {
+async function sendBuzzer(mode) {
 
-        console.log(error);
+    await fetch(SERVER + "/api/control", {
 
-    }
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            buzzer: mode
+        })
+
+    });
+
+    loadData();
 
 }
 
