@@ -23,9 +23,7 @@ href="style.css">
 
 <h1>🩺 SafeDrip ICU Monitoring System</h1>
 
-<p>
-Real-Time Saline Monitoring
-</p>
+<p>Real-Time Saline Monitoring</p>
 
 </div>
 
@@ -38,31 +36,13 @@ Real-Time Saline Monitoring
 <table>
 
 <tr>
-<td><b>Patient Name</b></td>
-<td id="patientName">
-Rahul
-</td>
-</tr>
-
-<tr>
 <td><b>Bed Number</b></td>
-<td id="bedNumber">
-ICU-03
-</td>
+<td id="bedNumber">ICU-03</td>
 </tr>
 
 <tr>
 <td><b>Ward</b></td>
-<td id="ward">
-ICU
-</td>
-</tr>
-
-<tr>
-<td><b>Doctor</b></td>
-<td id="doctor">
-Dr. Kumar
-</td>
+<td id="ward">ICU</td>
 </tr>
 
 </table>
@@ -75,9 +55,7 @@ Dr. Kumar
 
 <h2>Transmitter ID</h2>
 
-<div
-class="bigValue"
-id="txid">
+<div class="bigValue" id="txid">
 
 SYS_01
 
@@ -91,9 +69,7 @@ SYS_01
 
 <h2>Saline Weight</h2>
 
-<div
-class="bigValue"
-id="weight">
+<div class="bigValue" id="weight">
 
 0.00 g
 
@@ -107,9 +83,7 @@ id="weight">
 
 <h2>Relay Status</h2>
 
-<div
-class="bigValue"
-id="relay">
+<div class="bigValue" id="relay">
 
 OFF
 
@@ -123,9 +97,7 @@ OFF
 
 <h2>System Status</h2>
 
-<div
-class="bigValue"
-id="status">
+<div class="bigValue" id="status">
 
 SAFE
 
@@ -139,34 +111,17 @@ SAFE
 
 <h2>Motor Control</h2>
 
-<div
-class="bigValue"
-id="motor">
+<div class="bigValue" id="motor">
 
 AUTO
 
 </div>
 
-<button
-onclick="sendMotor('ON')">
+<button onclick="sendMotor('ON')">ON</button>
 
-ON
+<button onclick="sendMotor('OFF')">OFF</button>
 
-</button>
-
-<button
-onclick="sendMotor('OFF')">
-
-OFF
-
-</button>
-
-<button
-onclick="sendMotor('AUTO')">
-
-AUTO
-
-</button>
+<button onclick="sendMotor('AUTO')">AUTO</button>
 
 </div>
 
@@ -176,34 +131,17 @@ AUTO
 
 <h2>Buzzer Control</h2>
 
-<div
-class="bigValue"
-id="buzzer">
+<div class="bigValue" id="buzzer">
 
 AUTO
 
 </div>
 
-<button
-onclick="sendBuzzer('ON')">
+<button onclick="sendBuzzer('ON')">ON</button>
 
-ON
+<button onclick="sendBuzzer('OFF')">OFF</button>
 
-</button>
-
-<button
-onclick="sendBuzzer('OFF')">
-
-OFF
-
-</button>
-
-<button
-onclick="sendBuzzer('AUTO')">
-
-AUTO
-
-</button>
+<button onclick="sendBuzzer('AUTO')">AUTO</button>
 
 </div>
 
@@ -213,9 +151,7 @@ AUTO
 
 <h2>Last Updated</h2>
 
-<div
-class="bigValue"
-id="time">
+<div class="bigValue" id="time">
 
 --
 
