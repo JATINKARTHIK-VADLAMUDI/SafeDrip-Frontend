@@ -7,23 +7,20 @@ async function loadData() {
     try {
 
         const response = await fetch(SERVER + "/api/data");
-
         const data = await response.json();
 
-        // Patient Details (defaults if backend doesn't provide them yet)
-        document.getElementById("patientName").innerHTML =
-            data.patientName || "Rahul";
+        // ---------------- Patient Details ----------------
 
-        document.getElementById("bedNumber").innerHTML =
-            data.bedNumber || "ICU-03";
+        if (document.getElementById("bedNumber"))
+            document.getElementById("bedNumber").innerHTML =
+                data.bedNumber || "ICU-03";
 
-        document.getElementById("ward").innerHTML =
-            data.ward || "ICU";
+        if (document.getElementById("ward"))
+            document.getElementById("ward").innerHTML =
+                data.ward || "ICU";
 
-        document.getElementById("doctor").innerHTML =
-            data.doctor || "Dr. Kumar";
+        // ---------------- Live Data ----------------
 
-        // Live Data
         document.getElementById("txid").innerHTML =
             data.transmitter;
 
@@ -39,35 +36,33 @@ async function loadData() {
         document.getElementById("buzzer").innerHTML =
             data.buzzer;
 
-        // Status
-        let status = document.getElementById("status");
+        // ---------------- STATUS ----------------
+
+        const status = document.getElementById("status");
 
         status.innerHTML = data.status;
 
-        status.classList.remove("safe");
-        status.classList.remove("warning");
-        status.classList.remove("danger");
+        status.classList.remove("safe", "warning", "danger");
 
         if (data.status === "SAFE")
             status.classList.add("safe");
 
-        if (data.status === "WARNING")
+        else if (data.status === "WARNING")
             status.classList.add("warning");
 
-        if (data.status === "DANGER")
+        else if (data.status === "DANGER")
             status.classList.add("danger");
 
-        // Last Updated
-        const now = new Date();
+        // ---------------- TIME ----------------
 
         document.getElementById("time").innerHTML =
-            now.toLocaleTimeString();
+            new Date().toLocaleTimeString();
 
     }
 
     catch (err) {
 
-        console.log(err);
+        console.log("ERROR :", err);
 
     }
 
