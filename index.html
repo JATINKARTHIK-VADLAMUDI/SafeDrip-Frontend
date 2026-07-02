@@ -4,18 +4,45 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>SafeDrip ICU Monitoring</title>
 
-<link rel="stylesheet"
-href="style.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
+
+<!-- ALERT BANNER -->
+
+<div id="alertBanner" class="alertBanner">
+
+🚨 LOW SALINE LEVEL - REPLACE IMMEDIATELY
+
+</div>
+
+<!-- EMERGENCY POPUP -->
+
+<div id="popup" class="popup">
+
+<div class="popupContent">
+
+<h1>🚨 EMERGENCY</h1>
+
+<h2>LOW SALINE LEVEL</h2>
+
+<p><b>Transmitter :</b> <span id="popupTx">SYS_01</span></p>
+
+<p><b>Weight :</b> <span id="popupWeight">0 g</span></p>
+
+<p>Please Replace Saline Bottle Immediately.</p>
+
+<button onclick="closePopup()">OK</button>
+
+</div>
+
+</div>
 
 <div class="container">
 
@@ -36,13 +63,51 @@ href="style.css">
 <table>
 
 <tr>
-<td><b>Bed Number</b></td>
-<td id="bedNumber">ICU-01</td>
+
+<td><b>Patient Name</b></td>
+
+<td id="patientName">
+
+Rahul
+
+</td>
+
 </tr>
 
 <tr>
+
+<td><b>Bed Number</b></td>
+
+<td id="bedNumber">
+
+ICU-03
+
+</td>
+
+</tr>
+
+<tr>
+
 <td><b>Ward</b></td>
-<td id="ward">ICU</td>
+
+<td id="ward">
+
+ICU
+
+</td>
+
+</tr>
+
+<tr>
+
+<td><b>Doctor</b></td>
+
+<td id="doctor">
+
+Dr. Kumar
+
+</td>
+
 </tr>
 
 </table>
@@ -65,7 +130,7 @@ SYS_01
 
 <!-- Weight -->
 
-<div class="card">
+<div class="card" id="weightCard">
 
 <h2>Saline Weight</h2>
 
@@ -97,7 +162,7 @@ OFF
 
 <h2>System Status</h2>
 
-<div class="bigValue" id="status">
+<div class="bigValue safe" id="status">
 
 SAFE
 
@@ -117,11 +182,23 @@ AUTO
 
 </div>
 
-<button onclick="sendMotor('ON')">ON</button>
+<button onclick="sendMotor('ON')">
 
-<button onclick="sendMotor('OFF')">OFF</button>
+ON
 
-<button onclick="sendMotor('AUTO')">AUTO</button>
+</button>
+
+<button onclick="sendMotor('OFF')">
+
+OFF
+
+</button>
+
+<button onclick="sendMotor('AUTO')">
+
+AUTO
+
+</button>
 
 </div>
 
@@ -137,11 +214,23 @@ AUTO
 
 </div>
 
-<button onclick="sendBuzzer('ON')">ON</button>
+<button onclick="sendBuzzer('ON')">
 
-<button onclick="sendBuzzer('OFF')">OFF</button>
+ON
 
-<button onclick="sendBuzzer('AUTO')">AUTO</button>
+</button>
+
+<button onclick="sendBuzzer('OFF')">
+
+OFF
+
+</button>
+
+<button onclick="sendBuzzer('AUTO')">
+
+AUTO
+
+</button>
 
 </div>
 
