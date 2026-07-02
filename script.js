@@ -13,7 +13,7 @@ async function loadData() {
 
         if (document.getElementById("bedNumber"))
             document.getElementById("bedNumber").innerHTML =
-                data.bedNumber || "ICU-03";
+                data.bedNumber || "ICU-01";
 
         if (document.getElementById("ward"))
             document.getElementById("ward").innerHTML =
