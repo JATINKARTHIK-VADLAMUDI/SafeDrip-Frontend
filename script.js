@@ -1,4 +1,16 @@
 const SERVER = "https://safedrip-backend.onrender.com";
+// ---------------- ALERT VARIABLES ----------------
+
+let alertShown = false;
+let desktopNotificationShown = false;
+
+// Ask Notification Permission
+
+if ("Notification" in window) {
+
+    Notification.requestPermission();
+
+}
 
 // ---------------- LOAD DATA ----------------
 
@@ -26,6 +38,50 @@ async function loadData() {
 
         document.getElementById("weight").innerHTML =
             Number(data.weight).toFixed(2) + " g";
+        // ---------------- EMERGENCY ALERT ----------------
+        
+        const weightCard = document.getElementById("weightCard");
+        const alertBanner = document.getElementById("alertBanner");
+        
+        if (Number(data.weight) <= 20) {
+            
+            // Show Banner
+            
+            if (alertBanner)
+                alertBanner.style.display = "block";
+            // Flash Weight Card
+            if (weightCard)
+                weightCard.classList.add("flash");
+            // Popup only once
+            if (!alertShown) {
+                alertShown = true;
+                showPopup(data.weight, data.transmitter);
+                playAlarm();
+            }
+            // Desktop Notification only once
+            if (!desktopNotificationShown &&
+                Notification.permission === "granted") {
+                desktopNotificationShown = true;
+                new Notification("🚨 SafeDrip Alert", {
+                    body:
+                        "LOW SALINE LEVEL\n\n" +
+                        "Transmitter : " + data.transmitter +
+                        "\nWeight : " +
+                        Number(data.weight).toFixed(2) +
+                        " g\n\nReplace Saline Bottle.",
+                    icon:
+                        "https://cdn-icons-png.flaticon.com/512/2966/2966489.png"
+                });
+            }
+        }
+        else{
+            if(alertBanner)
+                alertBanner.style.display="none";
+            if(weightCard)
+                weightCard.classList.remove("flash");
+            alertShown=false;
+            desktopNotificationShown=false;
+        }
 
         document.getElementById("relay").innerHTML =
             data.relay;
@@ -65,6 +121,37 @@ async function loadData() {
         console.log("ERROR :", err);
 
     }
+
+}
+// ---------------- POPUP ----------------
+
+function showPopup(weight, transmitter){
+
+    document.getElementById("popup").style.display="block";
+
+    document.getElementById("popupWeight").innerHTML=
+    Number(weight).toFixed(2)+" g";
+
+    document.getElementById("popupTx").innerHTML=
+    transmitter;
+
+}
+
+function closePopup(){
+
+    document.getElementById("popup").style.display="none";
+    alertShown = false;
+
+}
+// ---------------- ALARM ----------------
+
+function playAlarm(){
+
+    const audio = new Audio(
+    "https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"
+    );
+
+    audio.play();
 
 }
 
