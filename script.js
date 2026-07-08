@@ -1,4 +1,14 @@
 const SERVER = "https://safedrip-backend.onrender.com";
+
+// ---------------- URL PARAMETERS ----------------
+
+const params = new URLSearchParams(window.location.search);
+
+const selectedFloor = params.get("floor");
+const selectedWard = params.get("ward");
+const selectedBed = params.get("bed");
+
+
 // ---------------- ALERT VARIABLES ----------------
 
 let alertShown = false;
@@ -23,13 +33,19 @@ async function loadData() {
 
         // ---------------- Patient Details ----------------
 
+       // ---------------- Patient Details ----------------
+        
         if (document.getElementById("bedNumber"))
             document.getElementById("bedNumber").innerHTML =
-                data.bedNumber || "ICU-01";
+                selectedBed || data.bedNumber || "--";
 
         if (document.getElementById("ward"))
             document.getElementById("ward").innerHTML =
-                data.ward || "ICU";
+                selectedWard || data.ward || "--";
+
+        if (document.getElementById("floor"))
+            document.getElementById("floor").innerHTML =
+                selectedFloor || "--";
 
         // ---------------- Live Data ----------------
 
