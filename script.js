@@ -28,7 +28,9 @@ async function loadData() {
 
     try {
 
-        const response = await fetch(SERVER + "/api/data");
+        const response = await fetch(
+            SERVER + "/api/bed-data?bed=" + encodeURIComponent(selectedBed || "Bed-01")
+        );
         const data = await response.json();
 
         // ---------------- Patient Details ----------------
